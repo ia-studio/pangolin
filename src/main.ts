@@ -1,24 +1,29 @@
-import './style.css'
-import typescriptLogo from './typescript.svg'
-import viteLogo from '/vite.svg'
-import { setupCounter } from './counter.ts'
+import { PREVIEW_CSS_CLASS_NAME } from "./constants";
+import "./style.css";
 
-document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
-  <div>
-    <a href="https://vitejs.dev" target="_blank">
-      <img src="${viteLogo}" class="logo" alt="Vite logo" />
-    </a>
-    <a href="https://www.typescriptlang.org/" target="_blank">
-      <img src="${typescriptLogo}" class="logo vanilla" alt="TypeScript logo" />
-    </a>
-    <h1>Vite + TypeScript</h1>
-    <div class="card">
-      <button id="counter" type="button"></button>
-    </div>
-    <p class="read-the-docs">
-      Click on the Vite and TypeScript logos to learn more
-    </p>
-  </div>
-`
+import HtmlVanillaEditor from "./vanilla/HtmlVanillaEditor";
 
-setupCounter(document.querySelector<HTMLButtonElement>('#counter')!)
+const editor = HtmlVanillaEditor.create({
+  id: "app",
+  tools: [{ type: "h1" }, { type: "p" }, { type: "div" }],
+  components: [],
+});
+
+const clearBtn = document.querySelector(".clear-btn");
+
+clearBtn?.addEventListener("click", () => {
+  editor.setComponents([]);
+
+  const preview = document.querySelector(`.${PREVIEW_CSS_CLASS_NAME}`);
+
+  if (preview) {
+    preview.innerHTML = "";
+    preview.appendChild(editor.render());
+  }
+});
+
+const exportBtn = document.querySelector(".export-btn");
+
+exportBtn?.addEventListener("click", () => {
+  console.log(JSON.stringify(editor.getComponents()));
+});
