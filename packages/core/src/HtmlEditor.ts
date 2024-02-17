@@ -1,6 +1,8 @@
 import createMenu from "./helpers/createMenu";
 import createPreview from "./helpers/createPreview";
 
+export * from "./constants";
+
 type FieldValue = string;
 
 type RenderProps = {

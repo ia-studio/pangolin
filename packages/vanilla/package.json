@@ -1,0 +1,7 @@
+{
+  "name": "pangolin-vanilla",
+  "version": "0.0.0",
+  "dependencies": {
+    "pangolin-core": "^0.0.0"
+  }
+}

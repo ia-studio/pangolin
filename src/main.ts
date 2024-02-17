@@ -1,7 +1,7 @@
-import { PREVIEW_CSS_CLASS_NAME } from "./constants";
-import "./style.css";
+import { PREVIEW_CSS_CLASS_NAME } from "pangolin-core";
+import { HtmlVanillaEditor } from "pangolin-vanilla";
 
-import HtmlVanillaEditor from "./vanilla/HtmlVanillaEditor";
+import "./style.css";
 
 const editor = HtmlVanillaEditor.create({
   id: "app",

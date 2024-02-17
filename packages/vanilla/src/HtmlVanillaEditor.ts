@@ -1,8 +1,10 @@
-import HtmlEditor, { Component, Tool } from "../HtmlEditor";
 import {
+  HtmlEditor,
+  type Component,
+  type Tool,
   ADD_BUTTON_CSS_CLASS_NAME,
   PREVIEW_CSS_CLASS_NAME,
-} from "../constants";
+} from "pangolin-core";
 
 export class HtmlVanillaEditor extends HtmlEditor {
   constructor({
