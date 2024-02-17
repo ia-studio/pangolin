@@ -56,10 +56,17 @@ export class HtmlVanillaEditor extends HtmlEditor {
   render() {
     const fragment = new DocumentFragment();
 
-    this.getComponents().forEach((item, index) => {
-      const element = document.createElement(item.type);
+    this.getComponents().forEach((component, index) => {
+      const tool = this.getTool(component.type);
 
-      element.dataset.id = item.props.id;
+      if (!tool) {
+        return;
+      }
+
+      const element = document.createElement("div");
+
+      element.innerHTML = tool.render(component.props);
+      element.dataset.id = component.props.id;
       element.dataset.index = String(index);
       element.draggable = true;
 

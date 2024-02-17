@@ -5,7 +5,22 @@ import HtmlVanillaEditor from "./vanilla/HtmlVanillaEditor";
 
 const editor = HtmlVanillaEditor.create({
   id: "app",
-  tools: [{ type: "h1" }, { type: "p" }, { type: "div" }],
+  tools: [
+    {
+      type: "header",
+      defaultValues: {
+        text: "This is a header",
+      },
+      render: ({ text }) => `<h1>${text}</h1>`,
+    },
+    {
+      type: "text",
+      defaultValues: {
+        text: "This is a text",
+      },
+      render: ({ text }) => `<p>${text}</p>`,
+    },
+  ],
   components: [],
 });
 

@@ -1,23 +1,56 @@
 import createMenu from "./helpers/createMenu";
 import createPreview from "./helpers/createPreview";
 
-export type Tool = { type: string };
+type FieldValue = string;
 
-export type Component = { type: string; props: { id: string; text: string } };
+type RenderProps = {
+  [key: string]: FieldValue;
+};
+
+export type Tool<T extends RenderProps = RenderProps> = {
+  type: string;
+  defaultValues?: T;
+  render: (props: T) => string;
+};
+
+export type Component = {
+  type: string;
+  props: { id: string } & Record<string, FieldValue>;
+};
+
+type Entity<T> = {
+  ids: string[];
+  entities: Record<string, T>;
+};
 
 export class HtmlEditor {
   tools: Tool[] = [];
+  toolEntity: Entity<Tool> = {
+    ids: [],
+    entities: {},
+  };
+
   components: Component[] = [];
 
   constructor({
-    tools,
     components,
+    tools,
   }: {
-    tools: Tool[];
     components: Component[];
+    tools: Tool[];
   }) {
-    this.tools = tools;
     this.components = components;
+    this.tools = tools;
+
+    this.toolEntity = tools.reduce<Entity<Tool>>(
+      (acc, tool) => {
+        acc.ids.push(tool.type);
+        acc.entities[tool.type] = tool;
+
+        return acc;
+      },
+      { ids: [], entities: {} }
+    );
   }
 
   init({ id }: { id: string }) {
@@ -37,7 +70,7 @@ export class HtmlEditor {
       type,
       props: {
         id: crypto.randomUUID(),
-        text: type.toUpperCase(),
+        ...this.getTool(type).defaultValues,
       },
     });
   }
@@ -59,6 +92,10 @@ export class HtmlEditor {
 
   getTools() {
     return this.tools;
+  }
+
+  getTool(componentType: string) {
+    return this.toolEntity.entities[componentType];
   }
 
   getComponents() {
