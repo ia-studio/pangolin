@@ -45,17 +45,6 @@ export const createPreview = (editor: InstanceType<typeof HtmlEditor>) => {
 
       return;
     }
-
-    if (preview.dataset.action === "sort" && event.dataTransfer) {
-      const fromIndex = parseInt(event.dataTransfer.getData("text/plain"), 10);
-      const toIndex = parseInt(
-        (event.target as HTMLElement).dataset.index ?? "0",
-        10
-      );
-      editor.sortComponent({ fromIndex, toIndex });
-
-      return;
-    }
   });
 
   return preview;

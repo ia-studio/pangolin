@@ -70,8 +70,18 @@ export class HtmlVanillaEditor extends HtmlEditor {
       element.dataset.index = String(index);
       element.draggable = true;
 
-      const textNode = document.createTextNode(item.props.text);
-      element.appendChild(textNode);
+      element.addEventListener("drop", (event) => {
+        const fromIndex = parseInt(
+          event.dataTransfer?.getData("text/plain") ?? "",
+          10
+        );
+
+        if (Number.isNaN(fromIndex)) {
+          return;
+        }
+
+        this.sortComponent({ fromIndex, toIndex: index });
+      });
 
       fragment.appendChild(element);
     });
