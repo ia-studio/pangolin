@@ -1,25 +1,25 @@
 import { PREVIEW_CSS_CLASS_NAME } from "pangolin-core";
-import { HtmlVanillaEditor } from "pangolin-vanilla";
+import { HtmlVanillaEditor, createTool } from "pangolin-vanilla";
 
 import "./style.css";
 
 const editor = HtmlVanillaEditor.create({
   id: "app",
   tools: [
-    {
+    createTool({
       type: "header",
       defaultValues: {
         text: "This is a header",
       },
       render: ({ text }) => `<h1>${text}</h1>`,
-    },
-    {
+    }),
+    createTool({
       type: "text",
       defaultValues: {
         text: "This is a text",
       },
       render: ({ text }) => `<p>${text}</p>`,
-    },
+    }),
   ],
   components: [],
 });

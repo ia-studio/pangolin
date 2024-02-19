@@ -1,1 +1,2 @@
-export * from "./src/HtmlVanillaEditor";
+export { HtmlVanillaEditor } from "./src/HtmlVanillaEditor";
+export { createTool } from "./src/helpers/createTool";

@@ -67,7 +67,7 @@ export class HtmlVanillaEditor extends HtmlEditor {
 
       const element = document.createElement("div");
 
-      element.innerHTML = tool.render(component.props);
+      element.innerHTML = tool.render(component.props) as string;
       element.dataset.id = component.props.id;
       element.dataset.index = String(index);
       element.draggable = true;

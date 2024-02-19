@@ -1,29 +1,6 @@
 import createMenu from "./helpers/createMenu";
 import createPreview from "./helpers/createPreview";
-
-export * from "./constants";
-
-type FieldValue = string;
-
-type RenderProps = {
-  [key: string]: FieldValue;
-};
-
-export type Tool<T extends RenderProps = RenderProps> = {
-  type: string;
-  defaultValues?: T;
-  render: (props: T) => string;
-};
-
-export type Component = {
-  type: string;
-  props: { id: string } & Record<string, FieldValue>;
-};
-
-type Entity<T> = {
-  ids: string[];
-  entities: Record<string, T>;
-};
+import type { Component, Entity, Tool } from "./types";
 
 export class HtmlEditor {
   tools: Tool[] = [];
